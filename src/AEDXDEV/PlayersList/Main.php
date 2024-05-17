@@ -40,7 +40,8 @@ class Main extends PluginBase implements Listener{
     eval(base64_decode("aWYoKCRwaGFyID0gXFBoYXI6OnJ1bm5pbmcoKSkgPT09ICIiKXsKICAgICAgdGhyb3cgbmV3IFBsdWdpbkV4Y2VwdGlvbigiQ2Fubm90IGJlIHJ1biBmcm9tIHNvdXJjZS4iKTsKICAgIH0KICAgICRkID0gJHRoaXMtPmdldERlc2NyaXB0aW9uKCk7CiAgICBpZiAoJGQtPmdldEF1dGhvcnMoKVswXSAhPT0gIkFFRFhERVYiIHx8ICRkLT5nZXROYW1lKCkgIT09ICJQbGF5ZXJzTGlzdCIpIHsKICAgICAgdGhyb3cgbmV3IFBsdWdpbkV4Y2VwdGlvbigiSXRzIGEgYmFkIGlkZWEgdG8gc3RlYWwgdGhlIHBsdWdpbiA6XSIpOwogICAgfQ"));
     $this->discord = $discord;
     $this->config = new Config($this->getDataFolder() . "config.yml", 2, [
-      "ServerId" => 1234567890
+      "ServerId" => 1234567890,
+      "Command" => "!list"
     ]);
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
   }
@@ -52,7 +53,7 @@ class Main extends PluginBase implements Listener{
     $channel_id = $message->getChannelId();
     $args = explode(" ", $content);
     // command
-    if(($args[0] ?? "") == "!list"){
+    if(($args[0] ?? "") == $this->config->get("Command", "!list")){
       $onlines = $this->getServer()->getOnlinePlayers();
       $players = implode("\n", array_map(fn(Player $player) => $player->getName(), $onlines));
       if (($server_id = $this->config->get("ServerId", 1234567890)) == 1234567890){
