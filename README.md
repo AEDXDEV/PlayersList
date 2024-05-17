@@ -7,3 +7,6 @@ show count players and name players in Discord
 # Youtube
 - @AEDXDEV
 - https://youtube.com/@aedxdev?si=DrqwxqAE5gcfV9ak
+
+# Discord
+- aedxdev
